@@ -1,17 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package musicRecord;
 
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
+import static java.awt.EventQueue.invokeLater;
 import java.awt.Point;
-import java.awt.Toolkit;
+import static java.awt.Toolkit.getDefaultToolkit;
+import java.awt.event.KeyEvent;
+import static java.awt.event.KeyEvent.VK_BACK_SPACE;
+import static java.awt.event.KeyEvent.VK_DELETE;
+import static java.awt.event.KeyEvent.VK_TAB;
+import static java.lang.Character.isDigit;
+import static java.lang.Integer.parseInt;
+import static java.lang.System.out;
 import java.time.LocalDate;
 import java.util.Date;
+import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Logger.getLogger;
 import javax.swing.JComboBox;
-import java.awt.event.FocusEvent;
+import static javax.swing.UIManager.getInstalledLookAndFeels;
+import static javax.swing.UIManager.setLookAndFeel;
 
 
 /**
@@ -26,10 +33,10 @@ import java.awt.event.FocusEvent;
  * @author chris
  */
 public class MusicRecordFrame extends javax.swing.JFrame {
-    private final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-    private final Dimension FRAME_SIZE = new Dimension(600,450);
+    private final Dimension SCREEN_SIZE = getDefaultToolkit().getScreenSize();
+    private final Dimension FRAME_SIZE = new Dimension(620,450);
     private final String[] listDiscType = {"","Single", "EP", "Álbum", "Recopilación", "Live"};
-    private final Date firstAlbumReleaseDate = new Date(1889,1,1,1,1,11);
+    //private final Date firstAlbumReleaseDate = new Date(1_889,1,1,1,1,11);
     private String discName;
     private String artistName;
     private String discType;
@@ -54,24 +61,18 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         final int WIDTH_CENTER = (int)((SCREEN_SIZE.getWidth() - FRAME_SIZE.getWidth())/2);
         final int HEIGHT_CENTER = (int)((SCREEN_SIZE.getHeight() - FRAME_SIZE.getHeight())/2);
         final Point SCREEN_CENTER = new Point(WIDTH_CENTER, HEIGHT_CENTER);
-        System.out.println("Se definió el centro de la pantalla");
+        out.println("Se definió el centro de la pantalla");
         return SCREEN_CENTER;
     }
     private boolean validString(String text){
-        if(text.isEmpty() || text.trim().isEmpty()){
-            return false;
-        }else{
-            return true;
-        }
+        return!(text.isEmpty() || text.isBlank());
+
     }
     
     private boolean validInt(int number){
-        final int MAX_INT_VALUE = 2147483647;
-        if(number<= 0 || number >= MAX_INT_VALUE){
-            return false;
-        }else{
-            return true;
-        }
+        final int MAX_INT_VALUE = 2_147_483_647;
+        return(number<= 0 || number >= MAX_INT_VALUE);
+        
     }
     
     private void setDefaultTextWarning(){
@@ -82,7 +83,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         releaseDateWarningLabel.setText("");
         priceWarningLabel.setText("");
         stockWarningLabel.setText("");
-        System.out.println("Se definió las advertencias en blanco");
+        out.println("Se definió las advertencias en blanco");
     }
     
     
@@ -95,6 +96,18 @@ public class MusicRecordFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        findByWindowFrame = new javax.swing.JFrame();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
         musicRecordPanel = new javax.swing.JPanel();
         discLabel = new javax.swing.JLabel();
         discNameTextField = new javax.swing.JTextField();
@@ -121,7 +134,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         cleanFieldsButton = new javax.swing.JButton();
         releaseDateWarningLabel = new javax.swing.JLabel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         EditMenu = new javax.swing.JMenu();
         findDataEditMenu = new javax.swing.JMenu();
@@ -135,6 +148,98 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         deleteFindByArtistMenu = new javax.swing.JMenuItem();
         deleteFindByDiscTypeMenu = new javax.swing.JMenuItem();
         deleteFindByCustomMenu = new javax.swing.JMenuItem();
+
+        findByWindowFrame.setEnabled(false);
+        findByWindowFrame.setLocation(getScreenCenter());
+        findByWindowFrame.setMaximumSize(new java.awt.Dimension(2147, 21474));
+        findByWindowFrame.setMinimumSize(new java.awt.Dimension(650, 500));
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jCheckBox1.setText("jCheckBox1");
+
+        jCheckBox2.setText("jCheckBox2");
+
+        jCheckBox3.setText("jCheckBox3");
+
+        jCheckBox4.setText("jCheckBox4");
+
+        jCheckBox5.setText("jCheckBox5");
+
+        jCheckBox6.setText("jCheckBox6");
+
+        jCheckBox7.setText("jCheckBox7");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jCheckBox2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox3)
+                            .addComponent(jCheckBox4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox5)
+                            .addComponent(jCheckBox6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox7)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout findByWindowFrameLayout = new javax.swing.GroupLayout(findByWindowFrame.getContentPane());
+        findByWindowFrame.getContentPane().setLayout(findByWindowFrameLayout);
+        findByWindowFrameLayout.setHorizontalGroup(
+            findByWindowFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        findByWindowFrameLayout.setVerticalGroup(
+            findByWindowFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        findByWindowFrame.getAccessibleContext().setAccessibleDescription("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de discos");
@@ -279,10 +384,18 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         registerButton.setText("Registrar");
 
         cleanFieldsButton.setText("Limpiar");
+        cleanFieldsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanFieldsButtonActionPerformed(evt);
+            }
+        });
 
         releaseDateWarningLabel.setFont(new java.awt.Font("Arial Unicode MS", 2, 12)); // NOI18N
         releaseDateWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         releaseDateWarningLabel.setText("Error");
+
+        jCalendar1.setMaxSelectableDate(new java.util.Date(253370779302000L));
+        jCalendar1.setMinSelectableDate(new java.util.Date(-2556039498000L));
 
         javax.swing.GroupLayout musicRecordPanelLayout = new javax.swing.GroupLayout(musicRecordPanel);
         musicRecordPanel.setLayout(musicRecordPanelLayout);
@@ -334,7 +447,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(registerButton))
                                 .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         musicRecordPanelLayout.setVerticalGroup(
             musicRecordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,7 +506,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         );
 
         fileMenu.setText("Archivo");
-        jMenuBar1.add(fileMenu);
+        menuBar.add(fileMenu);
 
         EditMenu.setText("Editar");
 
@@ -413,7 +526,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
 
         EditMenu.add(findDataEditMenu);
 
-        jMenuBar1.add(EditMenu);
+        menuBar.add(EditMenu);
 
         deleteMenu.setText("Eliminar");
 
@@ -433,9 +546,9 @@ public class MusicRecordFrame extends javax.swing.JFrame {
 
         deleteMenu.add(findDataDeleteMenu);
 
-        jMenuBar1.add(deleteMenu);
+        menuBar.add(deleteMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -488,7 +601,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         if(!validString(numberOfSongsText)){
             numberOfSongsWarningLabel.setText("Este campo es obligatorio");
         }else{
-            int numberOfSongsData = Integer.parseInt(numberOfSongsTextField.getText());
+            int numberOfSongsData = parseInt(numberOfSongsTextField.getText());
             if(!validInt(numberOfSongsData)){
                 numberOfSongsWarningLabel.setText("Este campo es obligatorio");
             }    
@@ -519,7 +632,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         if(!validString(priceText)){
             priceWarningLabel.setText("Este campo es obligatorio");
         }else{
-            int priceData = Integer.parseInt(priceTextField.getText());
+            int priceData = parseInt(priceTextField.getText());
             if(!validInt(priceData)){
                 priceWarningLabel.setText("El dato ingresado no es permitido");
             }    
@@ -537,7 +650,7 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         if(!validString(stockText)){
             stockWarningLabel.setText("Este campo es obligatorio");
         }else{
-            int stockData = Integer.parseInt(stockTextField.getText());
+            int stockData = parseInt(stockTextField.getText());
             if(!validInt(stockData)){
                 stockWarningLabel.setText("El dato ingresado no es permitido");
             }    
@@ -549,8 +662,8 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         listKeyCount[0] ++;
         char c = evt.getKeyChar();
-        boolean backSpacePressed = c == KeyEvent.VK_BACK_SPACE;
-        boolean deletePressed = c == KeyEvent.VK_DELETE;
+        boolean backSpacePressed = c == VK_BACK_SPACE;
+        boolean deletePressed = c == VK_DELETE;
         if(listKeyCount[0] == 50 || discNameTextField.getText().length() >= 50){
             evt.consume();
             discNameWarningLabel.setText("No puedes ingresar mas de 50 caracteres");
@@ -581,8 +694,8 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         listKeyCount[1] ++;
         char c = evt.getKeyChar();
-        boolean backSpacePressed = c == KeyEvent.VK_BACK_SPACE;
-        boolean deletePressed = c == KeyEvent.VK_DELETE;
+        boolean backSpacePressed = c == VK_BACK_SPACE;
+        boolean deletePressed = c == VK_DELETE;
         if(listKeyCount[1] >= 50){
             evt.consume();
             artistNameWarningLabel.setText("No puedes ingresar mas de 50 caracteres");
@@ -593,23 +706,32 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_artistNameTextFieldKeyTyped
+
+    private void cleanFieldsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanFieldsButtonActionPerformed
+        // TODO add your handling code here:
+        discNameTextField.setText("");
+        artistNameTextField.setText("");
+        numberOfSongsTextField.setText("");
+        discTypeComboBox.setSelectedIndex(0);
+        priceTextField.setText("");
+        stockTextField.setText("");
+    }//GEN-LAST:event_cleanFieldsButtonActionPerformed
     
     
     
     
     private void prohibitedNoNumerics(KeyEvent evt){
         char c = evt.getKeyChar();
-        boolean nonEssentialKeys = c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE && c != KeyEvent.VK_TAB;
-        if (!Character.isDigit(c) && nonEssentialKeys) {
+        boolean nonEssentialKeys = c != VK_BACK_SPACE && c != VK_DELETE && c != VK_TAB;
+        if (!isDigit(c) && nonEssentialKeys) {
             evt.consume();
             print("Prohibí no-numericos donde estos no corresponde");
-        }
-                
+        }          
     }
     
     
     private void print(String text){
-        System.out.println(text);
+        out.println(text);
     }
     
     /**
@@ -622,25 +744,21 @@ public class MusicRecordFrame extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MusicRecordFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MusicRecordFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MusicRecordFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MusicRecordFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            getLogger(MusicRecordFrame.class.getName()).log(SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
+        invokeLater(() -> {
             new MusicRecordFrame().setVisible(true);
         });
     }
@@ -667,12 +785,24 @@ public class MusicRecordFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem editFindByDiscMenu;
     private javax.swing.JMenuItem editFindByDiscTypeMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JFrame findByWindowFrame;
     private javax.swing.JMenu findDataDeleteMenu;
     private javax.swing.JMenu findDataEditMenu;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel musicRecordPanel;
     private javax.swing.JLabel numberOfSongsLabel;
     private javax.swing.JTextField numberOfSongsTextField;
