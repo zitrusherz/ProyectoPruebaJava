@@ -1,5 +1,5 @@
 
-package musicRecord;
+package Vista;
 
 import java.awt.Dimension;
 import static java.awt.EventQueue.invokeLater;
@@ -12,11 +12,10 @@ import static java.awt.event.KeyEvent.VK_TAB;
 import static java.lang.Character.isDigit;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.out;
-import java.time.LocalDate;
-import java.util.Date;
 import static java.util.logging.Level.SEVERE;
 import static java.util.logging.Logger.getLogger;
 import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import static javax.swing.UIManager.getInstalledLookAndFeels;
 import static javax.swing.UIManager.setLookAndFeel;
 
@@ -37,13 +36,6 @@ public class MusicRecordFrame extends javax.swing.JFrame {
     private final Dimension FRAME_SIZE = new Dimension(620,450);
     private final String[] listDiscType = {"","Single", "EP", "Álbum", "Recopilación", "Live"};
     //private final Date firstAlbumReleaseDate = new Date(1_889,1,1,1,1,11);
-    private String discName;
-    private String artistName;
-    private String discType;
-    private LocalDate releaseDate;
-    private int numberOfSongs;
-    private int price;
-    private int stock;
     private final int[] listKeyCount = {0,0,0,0,0};
     
     /**
@@ -244,10 +236,8 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de discos");
         setLocation(getScreenCenter());
-        setMaximumSize(SCREEN_SIZE);
         setMinimumSize(new java.awt.Dimension(620, 420));
         setName("musicRecordFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(620, 420));
         setResizable(false);
         setSize(new java.awt.Dimension(620, 420));
 
@@ -677,17 +667,26 @@ public class MusicRecordFrame extends javax.swing.JFrame {
 
     private void numberOfSongsTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numberOfSongsTextFieldKeyTyped
         // TODO add your handling code here:
-        prohibitedNoNumerics(evt);
+        prohibitedNoNumerics(evt, numberOfSongsTextField, 2);
+        if(intInputHandler(evt , 2)){
+            numberOfSongsWarningLabel.setText("No se permiten numeros tan grandes");
+        }
     }//GEN-LAST:event_numberOfSongsTextFieldKeyTyped
 
     private void priceTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_priceTextFieldKeyTyped
         // TODO add your handling code here:
-        prohibitedNoNumerics(evt);
+        prohibitedNoNumerics(evt, priceTextField, 3);
+        if(intInputHandler(evt , 3)){
+            priceWarningLabel.setText("No se permiten numeros tan grandes");
+        }
     }//GEN-LAST:event_priceTextFieldKeyTyped
 
     private void stockTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stockTextFieldKeyTyped
         // TODO add your handling code here:
-        prohibitedNoNumerics(evt);
+        prohibitedNoNumerics(evt, stockTextField, 4);
+        if(intInputHandler(evt ,4)){
+            stockWarningLabel.setText("No se permiten numeros tan grandes");
+        }
     }//GEN-LAST:event_stockTextFieldKeyTyped
 
     private void artistNameTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_artistNameTextFieldKeyTyped
@@ -716,17 +715,29 @@ public class MusicRecordFrame extends javax.swing.JFrame {
         priceTextField.setText("");
         stockTextField.setText("");
     }//GEN-LAST:event_cleanFieldsButtonActionPerformed
-    
-    
-    
-    
-    private void prohibitedNoNumerics(KeyEvent evt){
+      
+    private void prohibitedNoNumerics(KeyEvent evt, JTextField text, int position){
         char c = evt.getKeyChar();
         boolean nonEssentialKeys = c != VK_BACK_SPACE && c != VK_DELETE && c != VK_TAB;
         if (!isDigit(c) && nonEssentialKeys) {
             evt.consume();
             print("Prohibí no-numericos donde estos no corresponde");
+            
+        }else if(!nonEssentialKeys){
+            listKeyCount[position] = text.getText().length();
+        }else{
+            listKeyCount[position]++;
         }          
+    }
+    
+    private boolean intInputHandler(KeyEvent evt ,int position){
+        if(listKeyCount[position] > 9){
+            evt.consume();
+            print("Prohibí un int fuera de rango");
+            return true;
+        }
+        print(""+listKeyCount[position]);
+        return false;
     }
     
     
